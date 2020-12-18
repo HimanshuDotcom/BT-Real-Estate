@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from listings.choices import price_choices, bedroom_choices
 from listings.models import Listing
 from realtor.models import Realtor
 # Create your views here.
@@ -7,7 +8,9 @@ from realtor.models import Realtor
 def index(request):
     listings = Listing.objects.all().filter(is_published=True)[:3]
     context = {
-        "listings": listings
+        "listings": listings,
+        'price_choices': price_choices,
+        'bedroom_choices': bedroom_choices,
     }
     return render(request, 'pages/index.html', context)
 
