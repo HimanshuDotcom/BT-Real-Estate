@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import listing
+from .models import Listing
 
 class listingAdmin(admin.ModelAdmin):
     list_display = ('id','title', 'is_published', 'list_date', 'realtor')
@@ -9,4 +9,4 @@ class listingAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description', 'address', 'city', 'state', 'price')
     list_per_page = 25
 # Register your models here.
-admin.site.register(listing, listingAdmin)
+admin.site.register(Listing, listingAdmin)

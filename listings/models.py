@@ -2,7 +2,7 @@ from django.db import models
 from realtor.models import Realtor
 from datetime import datetime
 # Create your models here.
-class listing(models.Model):
+class Listing(models.Model):
     realtor = models.ForeignKey(Realtor,on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
