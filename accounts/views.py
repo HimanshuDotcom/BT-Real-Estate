@@ -5,7 +5,22 @@ from django.contrib import messages
 
 # Create your views here.
 def login(request):
-    return render(request,'accounts/login.html')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password = password)
+
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, 'You are now logged in')
+            return redirect('dashboard')
+        else:
+            messages.error(request,'Invalis credentials')
+            return redirect('login')
+    else:
+        return render(request, 'accounts/login.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -39,7 +54,10 @@ def register(request):
     return render(request, 'accounts/register.html')
 
 def logout(request):
-    return redirect('index')
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, 'You are now logged out')
+        return redirect('index')
 
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
