@@ -61,8 +61,7 @@ def logout(request):
         return redirect('index')
 
 def dashboard(request):
-    if request.user.is_authenticated:
-        contacts = Contact.objects.all().filter(user_id = request.user.id )
+    contacts = Contact.objects.all().filter(user_id = request.user.id )
     return render(request, 'accounts/dashboard.html',context = {
         'contacts': contacts
     })
